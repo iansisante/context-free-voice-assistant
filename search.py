@@ -6,6 +6,6 @@ import webbrowser
 google = "https://www.google.com/search?q="
 
 def websearch(search):
-    surl = f"https://www.google.com/search?q={search}"
-
+    
+    surl = google+search    
     webbrowser.get().open(surl)
