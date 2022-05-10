@@ -1,3 +1,3 @@
-import weather
+import search
 
-print(weather.get_temperature("naic cavite"))
+print(search.websearch("what is the best genshin support"))
