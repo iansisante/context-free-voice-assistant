@@ -1,42 +1,45 @@
 from concurrent.futures import thread
-from traceback import print_tb
 import search
 from threading import *
 from news import gamespot as g_news
 import time
 
-the_value = 1
+the_value = ""
 datas = g_news()
-current_data = []
 
 # GET USER INPUT IF REDIRECT TO LINK
-def doThis():
-    the_value = input("Voice input: ")
-    print("\nThe value: "+str(the_value)+"\n")
+def voiceRead():    
+    print("SAY YES IF WANT TO READ THE LINK!")
+    the_value = str(input("Voice input: "))
+    return the_value
 
 # SETS THE CURRENT DATA INTO A REDIRECTABLE DATA
 def getNews():
+    current_data = []
+
     for data in datas:
+
         current_data = data
         print(current_data['link'])
         print()
 
         time.sleep(0.5)
+        return
+
+    return current_data
     
 # FIRST CREATED THREAD IS THREAD 1
 t1 = Thread(target=getNews)
 t1.start()
 
 
-
 # THIS IS THE MAIN THREAD BUT NOT THREAD 1
 # MAIN THREAD RUNS WHILE THREAD 1 IS STILL RUNNING
 while(t1.is_alive()):
-    if the_value == 0:
-        print("GOTO: "+str(current_data['link']))
-        t1.join()
+    
+    if voiceRead() == "yes":
+        print(current_data)
+
         
-    doThis()
-    time.sleep(0.5)
 
 # print(search.websearch("what is the best genshin support"))
