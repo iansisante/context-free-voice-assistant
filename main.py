@@ -1,3 +1,10 @@
 import search
+import conversion as conv
 
-print(search.websearch("what is the best genshin support"))
+query = conv.speech_conversion()
+while (query == "None"):
+	query = conv.speech_conversion()
+
+print(search.websearch(query))
+
+conv.text_conversion("these are the results")

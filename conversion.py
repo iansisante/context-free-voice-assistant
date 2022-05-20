@@ -5,7 +5,7 @@ import os
 
 # Capture Voice
 # takes command through microphone
-def takecommand():
+def speech_conversion():
 	r = sr.Recognizer()
 	with sr.Microphone() as source:
 		print("listening.....")
@@ -15,17 +15,17 @@ def takecommand():
 	try:
 		print("Recognizing.....")
 		query = r.recognize_google(audio, language='en-in')
-		print(f"user said \n {query}\n")
+		# print(f"user said \n {query}\n")
 		return query
 	except Exception as e:
 		print("say that again please.....")
 		return "None"
 	return query
 
-# Taking voice input from the user
-# query returns the string output
-query = takecommand()
-while (query == "None"):
-	query = takecommand()
 
+def text_conversion(text):
+	speak = gTTS(text=text, lang='en', slow=False)
 
+	speak.save("captured_voice.mp3")
+	playsound('captured_voice.mp3')
+	os.remove('captured_voice.mp3')
