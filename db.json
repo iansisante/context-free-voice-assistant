@@ -1,0 +1,19 @@
+{
+    "user": "matthew",
+    "contacts": {
+        "matthew" : "matthewperrybustarde@gmail.com",
+        "kyle" : "kylechristianodecastro@gmail.com",
+        "ian" : "ian.sisante@tup.edu.ph"
+    },
+    "links": {
+        "google": "https://www.google.com/search?q=",
+        "youtube": "https://www.youtube.com/results?search_query=",
+        "wikipedia": "https://en.wikipedia.org/wiki/"
+    },
+    "apps": {
+        "spotify": "C:\\Program Files\\WindowsApps\\SpotifyAB.SpotifyMusic_1.188.612.0_x86__zpdnekdrzrea0\\Spotify.exe",
+        "discord": "C:\\Users\\Matthew\\AppData\\Local\\Discord\\app-1.0.9005\\Discord.exe",
+        "genshin": "C:\\Program Files\\Genshin Impact\\Genshin Impact game\\GenshinImpact.exe",
+        "valorant": "C:\\Riot Games\\VALORANT\\live\\VALORANT.exe"
+    }
+}

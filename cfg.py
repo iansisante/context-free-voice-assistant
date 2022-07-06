@@ -3,18 +3,18 @@ import sys
 
 TERMINALS = """
 skr -> "sakura"
-vb -> "search" | "open" | "check" | "send" | "launch" | "start"
-app -> "spotify" | "discord" | "code"
+vb -> "search" | "open" | "check" | "send" | "launch" | "start" | "add" | "change"
+app -> "spotify" | "discord" | "code" | "application" | "genshin" 
 web -> "wikipedia" | "youtube" | "google"
 msg -> "email"
-upd -> "time"
+upd -> "time" | "username" | "app" | "contact"
 prp -> "to"
-N -> "kyle" | "matthew" | "ian"
+N -> "kyle" | "matthew" | "ian" 
 """
 
 NONTERMINALS = """
 S -> skr NP
-NP -> vb app | vb web | vb msg PP | vb upd 
+NP -> vb app | vb web | vb msg PP | vb upd
 PP -> prp N
 """
 

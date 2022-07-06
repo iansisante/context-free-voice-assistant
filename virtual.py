@@ -1,3 +1,4 @@
+from numpy import take
 import pyttsx3 #pip install pyttsx3
 import speech_recognition as sr #pip install speechRecognition
 import datetime
@@ -5,10 +6,9 @@ import webbrowser
 import os
 import smtplib
 import cfg
-
+import json
 
 print("Initializing Sakura")
-MASTER = "User"
 
 contacts = {
     "matthew" : "matthewperrybustarde@gmail.com",
@@ -28,6 +28,9 @@ apps = {
     "genshin" : "C:\\Program Files\\Genshin Impact\\Genshin Impact game\\GenshinImpact.exe"
 }
 
+with open('db.json', 'r') as f:
+  data = json.load(f)
+
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -43,15 +46,15 @@ def wishMe():
     # print(hour)
 
     if hour>=0 and hour <12:
-        speak("good morning" + MASTER)
+        speak("good morning" + data["user"])
 
     elif hour>=12 and hour<18:
-        speak("good afternoon" + MASTER)
+        speak("good afternoon" + data["user"])
 
     else:
-        speak("good Evening" + MASTER)
+        speak("good Evening" + data["user"])
 
-    # speak("i am your assistant. How may I help you?")
+    speak("i am your assistant. How may I help you?")
 
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -98,14 +101,26 @@ def main():
         surl = url+query    
         webbrowser.get().open(surl)
         
-    elif 'check code' in query:
-        print(contacts["matthew"])
-        splitter = takeCommand()
-        print(splitter.split(" ")[-1])
+    elif 'change' in query:
+        speak("what do you want to be called?")
+        username = takeCommand()
+        data["user"] = username
+        with open('db.json', 'w') as json_file:
+            json.dump(data, json_file)
+
+    # elif 'add contact' in query:
+    #     speak("what is the name of the person you want to add?")
+    #     name = takeCommand()
+    #     speak("what is " + name + "'s email?")
+    #     email = takeCommand()
+    #     data["contacts"] = (name, email)
+    #     with open('db.json', 'w') as json_file:
+    #         json.dump(data, json_file)
 
     elif 'check time' in query:
         strTime = datetime.datetime.now().strftime("%H:%M:%S")
-        speak(f"{MASTER} the time is {strTime}")
+        user = data["user"]
+        speak(f"{user} the time is {strTime}")
 
     elif 'send email to' in query:
         try:
