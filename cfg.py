@@ -3,20 +3,24 @@ import sys
 
 TERMINALS = """
 skr -> "sakura"
-vb -> "search" | "open" | "check" | "send"
+vb -> "search" | "open" | "check" | "send" | "launch" | "start"
 app -> "spotify" | "discord" | "code"
 web -> "wikipedia" | "youtube" | "google"
 msg -> "email"
 upd -> "time"
+prp -> "to"
+N -> "kyle" | "matthew" | "ian"
 """
 
 NONTERMINALS = """
 S -> skr NP
-NP -> vb app | vb web | vb msg | vb upd 
+NP -> vb app | vb web | vb msg PP | vb upd 
+PP -> prp N
 """
 
 grammar = nltk.CFG.fromstring(NONTERMINALS + TERMINALS)
 parser = nltk.ChartParser(grammar)
+
 
 
 def cfg_checker(query):
@@ -44,12 +48,13 @@ def cfg_checker(query):
         return
 
     # Print each tree with noun phrase chunks
-    for tree in trees:
-        tree.pretty_print()
 
-        print("Noun Phrase Chunks")
+    for tree in trees:
+        # tree.pretty_print()
+
         for np in np_chunk(tree):
-            print(" ".join(np.flatten()))
+            str = " ".join(np.flatten())
+            return str
 
 
 def preprocess(sentence):
@@ -81,5 +86,5 @@ def np_chunk(tree):
     return chunks_list
 
 
-if __name__ == "__main__":
-    cfg_checker()
+# if __name__ == "__main__":
+#     cfg_checker()

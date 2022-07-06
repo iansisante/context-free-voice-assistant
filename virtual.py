@@ -86,38 +86,41 @@ def main():
     speak("Initializing Sakura...")
     wishMe()
     query = takeCommand()
-    cfg.cfg_checker(query)
-
+    query = cfg.cfg_checker(query)
+    print(query)
+    
     #Logic for executing tasks as per the query
-    if 'search' in query.lower():
-        #webbrowser.open('youtube.com')
-        url = "https://en.wikipedia.org/wiki/"
+    if 'search' in query:
+        link = query.split(" ")[-1]
+        url = links[link]
         speak("what do you want to search? ")
         query = takeCommand()
         surl = url+query    
         webbrowser.get().open(surl)
         
-    elif 'check code' in query.lower():
+    elif 'check code' in query:
         print(contacts["matthew"])
         splitter = takeCommand()
         print(splitter.split(" ")[-1])
 
-    elif 'check time' in query.lower():
+    elif 'check time' in query:
         strTime = datetime.datetime.now().strftime("%H:%M:%S")
         speak(f"{MASTER} the time is {strTime}")
 
-    elif 'launch' or 'start' or 'open' in query.lower():
-        application = query.split(" ")[-1]
-        os.startfile(apps[application])
-    
-    elif 'send email' in query.lower():
+    elif 'send email to' in query:
         try:
             name = query.split(" ")[-1]
             speak("what should i send")
             content = takeCommand()
             to = contacts[name]
             sendEmail(to, content)
-            speak("Email has been sent to matt")
+            speak("Email has been sent to " + name)
         except Exception as e:
             print(e)
+
+    elif 'launch' or 'start' or 'open' in query:
+        application = query.split(" ")[-1]
+        os.startfile(apps[application])
+    
+    
 main()
